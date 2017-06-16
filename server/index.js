@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
 app.use(passport.initialize());
 
-app.use('/api/auth', routes);
+app.use('/api/auth/', routes);
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
