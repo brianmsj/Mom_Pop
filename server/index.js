@@ -22,6 +22,7 @@ if(process.env.NODE_ENV != 'production') {
 global.secret = secret;
 
 const routes = require('./routes/user-routes');
+const listRoutes = require('./routes/jobpost-routes');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 app.use(passport.initialize());
 
 app.use('/api/auth/', routes);
+app.use('/api', jobRoutes)
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
