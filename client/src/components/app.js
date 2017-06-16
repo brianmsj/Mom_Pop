@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
 
-import QuestionPage from './question-page';
 import LoginPage from './login-page';
 
 class App extends React.Component {
@@ -44,7 +43,7 @@ class App extends React.Component {
             return <LoginPage />;
         }
 
-        return <QuestionPage />;
+        return "Hi";
     }
 }
 
