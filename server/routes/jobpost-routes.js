@@ -10,13 +10,12 @@ const JobPost = require ('../models/jobpost');
 mongoose.Promise = global.Promise;
 
 
-
 router.post('/jobpost', passportGoogle.authenticate('bearer', {session: false}), (req, res) => {
 
   const jobPostDetails = {
     createdBy: req.user._id,
     title: req.body.title,
-    categories: req.body.categories,
+    category: req.body.category,
     images: req.body.images,
     description: req.body.description,
     zipcode: req.body.zipcode
@@ -29,36 +28,36 @@ router.post('/jobpost', passportGoogle.authenticate('bearer', {session: false}),
 
   rp(options)
     .then(response => {
-      listingDetails.geometry = {coordinates: [response.lng, response.lat]};
+      jobPostDetails.geometry = {coordinates: [response.lng, response.lat]};
       return JobPost.create(jobPostDetails);
     })
     .then(listing => {
       res.status(200).json({listing});
     })
     .catch(err => {
-      // console.log(err)
+      console.log(err)
       res.status(500).json({err: err});
     });
 });
 
-// router.get('/mylistings', passportGoogle.authenticate('bearer', {session: false}), (req, res) => {
-//
-//   const query = {
-//     createdBy: {$eq: req.user._id}
-//   };
-//
-//   Listing
-//     .find(query)
-//     .exec()
-//     .then(listings => {
-//       listings.length > 0 ? res.json(listings) : res.json({message: `You Haven't Created Any Listings Yet`});
-//     })
-//     .catch(err => {
-//       res.status(500).json({error: 'something went wrong'});
-//     });
-//
-// });
-//
+router.get('/myjobposts', passportGoogle.authenticate('bearer', {session: false}), (req, res) => {
+
+  const query = {
+    createdBy: {$eq: req.user._id}
+  };
+
+  JobPost
+    .find(query)
+    .exec()
+    .then(listings => {
+      listings.length > 0 ? res.json(listings) : res.json({message: `You Haven't Posted Any Jobs Yet`});
+    })
+    .catch(err => {
+      res.status(500).json({error: 'something went wrong'});
+    });
+
+});
+
 // router.get('/listings', (req, res) => {
 //   Listing
 //     .find()

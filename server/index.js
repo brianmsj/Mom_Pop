@@ -22,7 +22,7 @@ if(process.env.NODE_ENV != 'production') {
 global.secret = secret;
 
 const routes = require('./routes/user-routes');
-const listRoutes = require('./routes/jobpost-routes');
+const jobRoutes = require('./routes/jobpost-routes');
 
 const app = express();
 

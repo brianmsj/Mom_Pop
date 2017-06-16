@@ -21,9 +21,9 @@ const JobSchema = new Schema ({
     type: String,
     required: true
   },
-  categories: {
-    type: Array,
-    required: false
+  category: {
+    type: String,
+    required: true
   },
   images: {
     type: Array,
