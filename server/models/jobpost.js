@@ -25,6 +25,10 @@ const JobSchema = new Schema ({
     type: String,
     required: true
   },
+  pay: {
+    type: Number,
+    required: false
+  },
   images: {
     type: Array,
   },

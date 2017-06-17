@@ -16,6 +16,7 @@ router.post('/jobpost', passportGoogle.authenticate('bearer', {session: false}),
     createdBy: req.user._id,
     title: req.body.title,
     category: req.body.category,
+    pay: req.body.pay,
     images: req.body.images,
     description: req.body.description,
     zipcode: req.body.zipcode
@@ -58,66 +59,66 @@ router.get('/myjobposts', passportGoogle.authenticate('bearer', {session: false}
 
 });
 
-// router.get('/listings', (req, res) => {
-//   Listing
-//     .find()
-//     .populate({
-//       path: 'createdBy',
-//       select: 'name profilePic'
-//     })
-//     .exec()
-//     .then(listings => {
-//       res.json(listings);
-//     })
-//     .catch(err => {
-//       res.status(500).json({error: 'something went wrong'});
-//     });
-// });
+router.get('/jobposts', (req, res) => {
+  JobPost
+    .find()
+    .populate({
+      path: 'createdBy',
+      select: 'name profilePic'
+    })
+    .exec()
+    .then(listings => {
+      res.json(listings);
+    })
+    .catch(err => {
+      res.status(500).json({error: 'something went wrong'});
+    });
+});
 //
-// router.get('/listings/:createdBy', (req, res) => {
-//   Listing
-//     .find({createdBy: req.params.createdBy})
-//     .populate({
-//       path: 'createdBy',
-//       select: 'name profilePic'
-//     })
-//     .exec()
-//     .then(listing => {
-//       res.json(listing);
-//     })
-//     .catch(err => {
-//       res.status(500).json({error: 'something went wrong'});
-//     });
-// });
+router.get('/jobposts/:createdBy', (req, res) => {
+  JobPost
+    .find({createdBy: req.params.createdBy})
+    .populate({
+      path: 'createdBy',
+      select: 'name profilePic'
+    })
+    .exec()
+    .then(listing => {
+      res.json(listing);
+    })
+    .catch(err => {
+      res.status(500).json({error: 'something went wrong'});
+    });
+});
 //
-// router.get('/listing/:id', (req, res) => {
-//   Listing
-//     .find({_id: req.params.id})
-//     .populate({
-//       path: 'createdBy',
-//       select: 'name profilePic'
-//     })
-//     .exec()
-//     .then(listing => {
-//       res.json(listing);
-//     })
-//     .catch(err => {
-//       res.status(500).json({error: 'something went wrong'});
-//     });
-// });
+router.get('/jobposting/:id', (req, res) => {
+  JobPost
+    .find({_id: req.params.id})
+    .populate({
+      path: 'createdBy',
+      select: 'name profilePic'
+    })
+    .exec()
+    .then(listing => {
+      res.json(listing);
+    })
+    .catch(err => {
+      res.status(500).json({error: 'something went wrong'});
+    });
+});
 //
-// router.delete('/listing/:createdBy/:id', passportGoogle.authenticate('bearer', {session: false}),
-//   (req, res) => {
-//     Listing
-//       .findByIdAndRemove(req.params.id)
-//       .exec()
-//       .then(() => {
-//         res.status(200).json({message: 'success'});
-//       })
-//       .catch(err => {
-//       res.status(500).json({error: 'something went terribly wrong'});
-//     });
-// });
+router.delete('/jobposter/:createdBy/:id', passportGoogle.authenticate('bearer', {session: false}),
+  (req, res) => {
+    JobPost
+      .findByIdAndRemove(req.params.id)
+      .exec()
+      .then(() => {
+        res.status(200).json({message: 'success'});
+      })
+      .catch(err => {
+      res.status(500).json({error: 'something went terribly wrong'});
+    });
+});
 //
 // router.put('/listing/:createBy/:id', passportGoogle.authenticate('bearer', {session: false}),
 //   (req, res) => {
