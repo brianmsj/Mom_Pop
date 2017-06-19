@@ -1,9 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route, IndexRoute, BrowserRouter, Switch } from 'react-router-dom';
 import App from './components/app';
+import {createStore, applyMiddleware} from 'redux';
 import './index.css';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+import {Provider} from 'react-redux';
+
+
+
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
+
 
 ReactDOM.render(
-  <App />,
+<Provider store={store}>
+  <BrowserRouter>
+   <Switch>
+    <Route path="/" component={App} />
+   </Switch>
+  <App />
+  </BrowserRouter>
+ </Provider >,
   document.getElementById('root')
 );

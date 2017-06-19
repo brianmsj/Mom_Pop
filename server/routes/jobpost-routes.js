@@ -62,7 +62,7 @@ router.get('/myjobposts', passportGoogle.authenticate('bearer', {session: false}
 
 });
 
-router.get('/jobposts', (req, res) => {
+router.get('/jobposts',passport.authenticate('bearer', {session: false}), (req, res) => {
   JobPost
     .find()
     .populate({
@@ -134,19 +134,18 @@ router.post('/localuser', (req, res) => {
         return res.status(422).json({message: 'e-mail already taken'});
       }
       // if no existing user, hash password
-      return User.hashPassword(password)
+      return User.hashPassword(req.body.password)
     })
     .then(hash => {
       return User
         .create({
-          username: username,
           password: hash,
-          firstName: firstName,
-          lastName: lastName
+          email: req.body.email,
+          accessToken: jwt.encode(req.body.email,hash,'HS512')
         })
     })
     .then(user => {
-      return res.status(201).json(user.apiRepr());
+      return res.status(201).json(user);
     })
     .catch(err => {
       res.status(500).json({message: 'Internal server error'})

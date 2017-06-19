@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as actions from '../actions/index';
 
 
 export class SignUp extends Component {
