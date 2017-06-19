@@ -9,6 +9,7 @@ const passportTwitter = require('../auth/twitter');
 const expressPassport = require('passport');
 const bodyParser = ('body-parser');
 const session = require('express-session')
+const jwt = require('jwt-simple')
 
 
 mongoose.Promise = global.Promise;
@@ -64,6 +65,18 @@ router.get('/twitter/callback',
       res.redirect('/');
     }
 );
+router.get('/localuser/callback',
+    passportBasic.authenticate('basic', {
+      failureRedirect: '/',
+      session: false
+    }),
+    (req, res) => {
+      res.cookie('accessToken', req.user.accessToken, {expires: 0});
+      res.redirect('/');
+    }
+);
+
+
 
 
 

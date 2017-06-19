@@ -38,26 +38,6 @@ class App extends React.Component {
         }
     }
 
-    // Adam Lazco - Managing Director. For HighMetric.
-    // 5 - 7 people
-    // Personality. Know what the job entails. Technical process. Pre-Sales.
-    // Basic.
-    // 2 offices in Chicago. San Francisco, Houston, Dallas. Office. Remote.
-    // Stay at home and go to see the client site. Remotely.
-    // 20% Development, tweaking things on the platform.
-    // Solution that comes out of the box. Javascript
-    // Which modules are actually necessary for the client to use. Which modules do the client
-    // need to use? Integrate with current system.
-    // What is your knowledge of databases??? Microsoft MS SQL.
-    // How would you solve this issue? Looking for if you know how to find the answer.
-    // After we do the demo. Coached on the all the modules
-    // Work as a business analyst. help the BA's ask questions? what do you actually need?
-    // explain how the HR module works. Why is it there?
-    // Team builds out solution.
-    // Go and hang out with the clients and make sure the integration.
-    // Talk to client sys admins and network engineers. Needs to work with e-mail.
-    //
-
     render() {
         if (!this.state.currentUser) {
             return <LoginPage />;

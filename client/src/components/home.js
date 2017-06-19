@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import * as Cookies from 'js-cookie';
+import SignUp from './signup-form';
+
 
 
 export class Home extends Component {
@@ -8,9 +9,14 @@ export class Home extends Component {
         return (
             <div>
               <h1>This is the home page</h1>
+              <SignUp />
             </div>
         );
     }
 }
 
 export default Home;
+
+//ITSM
+//ITOM
+//HR

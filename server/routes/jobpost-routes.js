@@ -6,6 +6,8 @@ const bearer = require('../auth/bearer');
 const passport = require('passport');
 const passportGoogle = require('../auth/google');
 const JobPost = require ('../models/jobpost');
+const User = require ('../models/user');
+const jwt = require('jwt-simple')
 
 
 mongoose.Promise = global.Promise;
@@ -118,6 +120,36 @@ router.delete('/jobposter/:createdBy/:id', passportGoogle.authenticate('bearer',
       })
       .catch(err => {
       res.status(500).json({error: 'something went terribly wrong'});
+    });
+});
+
+router.post('/localuser', (req, res) => {
+    let email = req.body.email
+    User
+    .find({email})
+    .count()
+    .exec()
+    .then(count => {
+      if (count > 0) {
+        return res.status(422).json({message: 'e-mail already taken'});
+      }
+      // if no existing user, hash password
+      return User.hashPassword(password)
+    })
+    .then(hash => {
+      return User
+        .create({
+          username: username,
+          password: hash,
+          firstName: firstName,
+          lastName: lastName
+        })
+    })
+    .then(user => {
+      return res.status(201).json(user.apiRepr());
+    })
+    .catch(err => {
+      res.status(500).json({message: 'Internal server error'})
     });
 });
 //
