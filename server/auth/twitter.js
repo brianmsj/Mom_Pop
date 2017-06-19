@@ -1,5 +1,5 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 const User = require('../models/user');
 
@@ -8,25 +8,26 @@ const database = {
 };
 
 passport.use(
-  new GoogleStrategy({
-    clientID: global.secret.CLIENT_ID,
-    clientSecret: global.secret.CLIENT_SECRET,
-    callbackURL: `/api/auth/google/callback`
+  new TwitterStrategy({
+    consumerKey: global.secret.TWITTER_KEY,
+    consumerSecret: global.secret.TWITTER_SECRET,
+    callbackURL: `/api/auth/twitter/callback`
   },
   (accessToken, refreshToken, profile, cb) => {
+    console.log(profile)
     const user = database[accessToken] = {
-      googleID: profile.id,
+      twitterId: profile.id,
       accessToken: accessToken
     };
 
     const searchQuery = {
-      googleID: profile.id
+      twitterId: profile.id,
     };
 
     const updates = {
       name: profile.displayName,
       accessToken: accessToken,
-      googleID: profile.id,
+      twitterId: profile.id,
       profilePic: profile.photos[0].value,
     };
 

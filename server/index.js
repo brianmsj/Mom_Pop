@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const http = require('http');
 const socketIo = require('socket.io');
+const session = require('express-session')
 
 mongoose.Promise = global.Promise;
 
@@ -37,6 +38,11 @@ app.use((req, res, next) => {
 });
 
 app.use(passport.initialize());
+app.use(session({
+    secret: 'topsecret',
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use('/api/auth/', routes);
 app.use('/api', jobRoutes)

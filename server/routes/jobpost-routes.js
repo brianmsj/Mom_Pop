@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const rp = require('request-promise-native');
 const bearer = require('../auth/bearer');
+const passport = require('passport');
 const passportGoogle = require('../auth/google');
 const JobPost = require ('../models/jobpost');
 
@@ -10,7 +11,7 @@ const JobPost = require ('../models/jobpost');
 mongoose.Promise = global.Promise;
 
 
-router.post('/jobpost', passportGoogle.authenticate('bearer', {session: false}), (req, res) => {
+router.post('/jobpost', passport.authenticate('bearer', {session: false}), (req, res) => {
 
   const jobPostDetails = {
     createdBy: req.user._id,

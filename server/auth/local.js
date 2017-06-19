@@ -1,33 +1,35 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const BearerStrategy = require('passport-http-bearer').Strategy;
 const User = require('../models/user');
+const LocalStrategy = require('passport-local').Strategy
+const BearerStrategy = require('passport-http-bearer').Strategy;
 
 const database = {
     DATABASE_URL: global.secret.DATABASE_URL
 };
 
 passport.use(
-  new GoogleStrategy({
-    clientID: global.secret.CLIENT_ID,
-    clientSecret: global.secret.CLIENT_SECRET,
-    callbackURL: `/api/auth/google/callback`
+  new LocalStrategy({
+    usernameField: 'brianmsj',
+    passwordField: 'lansford2',
+    callbackURL: `/api/auth/local/callback`
   },
-  (accessToken, refreshToken, profile, cb) => {
+  (accessToken, refreshToken, username, password, cb) => {
+    console.log(username)
+
     const user = database[accessToken] = {
-      googleID: profile.id,
+      username: username,
+      password: password,
       accessToken: accessToken
     };
 
     const searchQuery = {
-      googleID: profile.id
+      username: username
     };
 
     const updates = {
-      name: profile.displayName,
+      username: username,
       accessToken: accessToken,
-      googleID: profile.id,
-      profilePic: profile.photos[0].value,
+      password: password,
     };
 
     const options = {
@@ -36,6 +38,7 @@ passport.use(
     };
     User.findOneAndUpdate(searchQuery, {$set: updates}, options, (err, user) => {
       if (err) {
+        console.log('hi')
         console.log(err);
         return cb(err);
       }

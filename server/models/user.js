@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = mongoose.Schema({
-  googleID: {type: Number, required: true},
-  name: {type: String, required: true},
-  accessToken: {type: String, required: true},
-  profilePic: {type: String, required: true}
+  googleID: {type: Number, required: false},
+  twitterId: {type: Number, required: false},
+  name: {type: String, required: false},
+  accessToken: {type: String, required: false},
+  profilePic: {type: String, required: false}
 },
 {
   timestamps: true
