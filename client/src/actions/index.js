@@ -122,6 +122,7 @@ export const fetchUserData = (user) => ({
 //----Create Listing Async Action----------//
 
 export const createUser = (values) => dispatch => {
+  console.log('action going')
   return fetch('/api/localuser',
     {
       headers: {
@@ -130,7 +131,7 @@ export const createUser = (values) => dispatch => {
       method: 'POST',
       body: JSON.stringify(values)
     })
-    .then(() => dispatch(fetchUserData()))
+    .then((user) => dispatch(fetchUserData(user)))
 
     .catch(error => {
       console.error(error);

@@ -19,7 +19,6 @@ ReactDOM.render(
    <Switch>
     <Route path="/" component={App} />
    </Switch>
-  <App />
   </BrowserRouter>
  </Provider >,
   document.getElementById('root')
