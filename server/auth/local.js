@@ -4,25 +4,24 @@ const LocalStrategy = require('passport-local').Strategy
 const BearerStrategy = require('passport-http-bearer').Strategy;
 
 
-passport.use(
-  new LocalStrategy({
-    usernameField: 'brianmsj',
-    passwordField: 'lansford2',
-    callbackURL: `/api/auth/local/callback`
+passport.use('local', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
   },
-  (accessToken, refreshToken, username, password, cb) => {
-
-    User.findOneAndUpdate(searchQuery, {$set: updates}, options, (err, user) => {
+  function(email, password, done) {
+    User.authenticate(email, password, function(err, user) {
       if (err) {
-        console.log('hi')
-        console.log(err);
-        return cb(err);
+        return done(err);
       }
-      else {
-        return cb(null, user);
+
+      if (!user) {
+        return done(null, false, { message: 'Invalid email or password.' });
       }
+
+      return done(null, user);
     });
-  })
-);
+  }
+));
+
 
 module.exports = passport;

@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const http = require('http');
 const socketIo = require('socket.io');
+const cookieParser = require('cookie-parser');
 const session = require('express-session')
 
 mongoose.Promise = global.Promise;
@@ -43,6 +44,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+app.use(cookieParser())
 
 app.use('/api/auth/', routes);
 app.use('/api', jobRoutes)

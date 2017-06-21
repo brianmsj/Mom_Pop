@@ -137,6 +137,21 @@ export const createUser = (values) => dispatch => {
       console.error(error);
     });
 };
+export const checkUser = (values) => dispatch => {
+  console.log('actionfired')
+  return fetch(`/api/auth/localuser/callback`,
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+    })
+    .then((response) => console.log(response.json()))
+    .catch(error => {
+      console.error(error);
+    });
+
+};
 //
 // //-----------FetchAllListing Async Action-------------//
 //
