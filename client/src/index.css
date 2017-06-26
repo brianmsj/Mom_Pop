@@ -29,14 +29,35 @@ body {
   position: relative;
   background-image: url("https://res.cloudinary.com/dgty4zoyf/image/upload/v1498513788/small_business_w9qfzw.jpg");
   background-size: cover;
+  text-align: center;
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
 .motto {
-  top: 40%;
+  top: 27%;
   color: white;
-  font-weight: lighter;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  left: 10%;
+  right: 10%;
+  width: 80%;
   position: absolute;
+}
+.main-search-input,.main-search-button {
+  margin-left: 10px;
+}
+.main-search-input {
+  display: inline-block;
+  height: 30px;
+  font-family: 'Roboto',sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  width: 270px;
+}
+.search-titles {
+}
+.search-titles.one-title {
+  font-size: 30px;
 }
