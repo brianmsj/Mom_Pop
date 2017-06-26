@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.style-line {
+  width: 100%;
+  background-color: lightgrey;
+  height:1px;
+}

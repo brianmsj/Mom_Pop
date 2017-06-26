@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, IndexRoute, BrowserRouter, Switch } from 'react-router-dom';
 import App from './components/app';
+import Header from './components/header'
 import {createStore, applyMiddleware} from 'redux';
 import './index.css';
 import thunk from 'redux-thunk';
@@ -16,9 +17,12 @@ const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && wi
 ReactDOM.render(
 <Provider store={store}>
   <BrowserRouter>
+  <div>
+   <Header />
    <Switch>
     <Route path="/" component={App} />
    </Switch>
+   </div>
   </BrowserRouter>
  </Provider >,
   document.getElementById('root')
