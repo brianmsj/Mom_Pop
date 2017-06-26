@@ -5,6 +5,7 @@ import App from './components/app';
 import Header from './components/header'
 import {createStore, applyMiddleware} from 'redux';
 import './index.css';
+import './grid.css';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import {Provider} from 'react-redux';

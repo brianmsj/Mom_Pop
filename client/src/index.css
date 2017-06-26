@@ -8,3 +8,15 @@ body {
   background-color: lightgrey;
   height:1px;
 }
+.head-nav {
+  list-style: none;
+  display: inline-block;
+  margin-left: 30px;
+}
+.main-nav {
+  margin-top: 10px;
+
+}
+.header-container {
+  text-align: center;
+}
