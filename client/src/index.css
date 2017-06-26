@@ -20,3 +20,23 @@ body {
 .header-container {
   text-align: center;
 }
+.image-cloud {
+  width: 100%;
+  height: 100%;
+}
+.home-image-container.col-12 {
+  height: 350px;
+  position: relative;
+  background-image: url("https://res.cloudinary.com/dgty4zoyf/image/upload/v1498513788/small_business_w9qfzw.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.motto {
+  top: 40%;
+  color: white;
+  font-weight: lighter;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}

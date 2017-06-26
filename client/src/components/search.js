@@ -3,14 +3,18 @@ import React, { Component } from 'react';
 
 
 
+
 export class Search extends Component {
 
     render() {
         return (
             <div className='search-container'>
-            <Image publicId="small_business_d7j6cb.jpg" >
-              <h1>Mom and Pop</h1>
-            </Image>
+              <div className='home-image-container col-12'>
+              <div className='motto'>
+                <h4>Helping local small business find great employees</h4>
+              </div>
+              </div>
+
             </div>
         );
     }
