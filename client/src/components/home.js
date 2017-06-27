@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SignUp from './signup-form';
 import Search from './search';
+import Profile from './profile';
 
 
 

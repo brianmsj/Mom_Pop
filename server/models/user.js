@@ -10,7 +10,11 @@ const UserSchema = mongoose.Schema({
   accessToken: {type: String, required: false},
   profilePic: {type: String, required: false},
   email: {type: String, required: false},
-  password: {type: String, required: false}
+  password: {type: String, required: false},
+  education: {type: String, required: false},
+  experience: {type: String, required: false}
+
+
 },
 {
   timestamps: true

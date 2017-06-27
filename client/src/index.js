@@ -6,6 +6,7 @@ import Header from './components/header'
 import {createStore, applyMiddleware} from 'redux';
 import './index.css';
 import './grid.css';
+import Profile from './components/profile'
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import {Provider} from 'react-redux';
@@ -21,6 +22,7 @@ ReactDOM.render(
   <div>
    <Header />
    <Switch>
+    <Route path="/profile" component={Profile}/>
     <Route path="/" component={App} />
    </Switch>
    </div>
