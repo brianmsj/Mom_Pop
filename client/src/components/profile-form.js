@@ -6,7 +6,7 @@ import {Field, reduxForm} from 'redux-form'
 
 
 
-export class profileForm extends Component {
+export class ProfileForm extends Component {
 
     const {handleSubmit, pristine, reset, submitting} = this.props
     render() {
@@ -27,4 +27,4 @@ export class profileForm extends Component {
     }
 }
 
-export default Profile
+export default ProfileForm
