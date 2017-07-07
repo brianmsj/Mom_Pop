@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import profileForm from './profile-form'
+import ProfileForm from './profile-form'
 import {Field, reduxForm} from 'redux-form'
 
 
