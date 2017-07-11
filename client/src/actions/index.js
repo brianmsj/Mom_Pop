@@ -13,6 +13,7 @@ export const fetchUserData = (user) => ({
     _id: user._id
 });
 
+
 // export const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
 // export const fetchUserFailure = (error) => ({
 //     type: FETCH_USER_FAILURE,

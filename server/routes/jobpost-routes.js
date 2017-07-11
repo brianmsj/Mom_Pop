@@ -13,6 +13,7 @@ const jwt = require('jwt-simple')
 mongoose.Promise = global.Promise;
 
 
+
 router.post('/jobpost', passport.authenticate('bearer', {session: false}), (req, res) => {
 
   const jobPostDetails = {
@@ -62,16 +63,15 @@ router.get('/myjobposts', passportGoogle.authenticate('bearer', {session: false}
 
 });
 
-router.get('/jobposts',passport.authenticate('bearer', {session: false}), (req, res) => {
+router.get('/jobposts/:zipcode/',passport.authenticate('bearer', {session: false}), (req, res) => {
+  query = {
+    zipcode: req.params.zipcode,
+  }
+  console.log(query)
   JobPost
-    .find()
-    .populate({
-      path: 'createdBy',
-      select: 'name profilePic'
-    })
+    .find(query)
     .exec()
-    .then(listings => {
-      res.json(listings);
+    .then(listings => {res.json(listings)
     })
     .catch(err => {
       res.status(500).json({error: 'something went wrong'});
