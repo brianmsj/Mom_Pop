@@ -8,6 +8,7 @@ const passportGoogle = require('../auth/google');
 const JobPost = require ('../models/jobpost');
 const User = require ('../models/user');
 const jwt = require('jwt-simple')
+const zipcodes = require('zipcodes')
 
 
 mongoose.Promise = global.Promise;
@@ -63,15 +64,26 @@ router.get('/myjobposts', passportGoogle.authenticate('bearer', {session: false}
 
 });
 
-router.get('/jobposts/:zipcode/',passport.authenticate('bearer', {session: false}), (req, res) => {
-  query = {
-    zipcode: req.params.zipcode,
-  }
-  console.log(query)
+function showZips(zipcodes) {
+
+}
+
+router.get('/jobposts/:zipcode',passport.authenticate('bearer', {session: false}), (req, res) => {
+  var nearby = zipcodes.radius(req.params.zipcode,5)
   JobPost
-    .find(query)
+    .find()
     .exec()
-    .then(listings => {res.json(listings)
+    .then(
+      listings=> {
+      var listingZips=[]
+      for(let i=0;i<listings.length;i++) {
+        for(let j=0;j<nearby.length;j++) {
+          if(listings[i].zipcode == nearby[j]) {
+            listingZips.push(listings[i])
+        }
+      }
+    }
+       res.json(listingZips)
     })
     .catch(err => {
       res.status(500).json({error: 'something went wrong'});
