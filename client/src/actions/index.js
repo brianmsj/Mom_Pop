@@ -12,6 +12,17 @@ export const fetchUserData = (user) => ({
     email: user.email,
     _id: user._id
 });
+export const FETCH_LISTINGSBYZIP_SUCCESS = 'FETCH_LISTINGSBYZIP_SUCCESS';
+export const fetchListingsByZipSuccess = (listingByZip) => ({
+    type: FETCH_LISTINGSBYZIP_SUCCESS,
+    listingByZip: listingByZip,
+});
+export const FETCH_LISTINGSBYZIP_FAILURE = 'FETCH_LISTINGSBYZIP_FAILURE';
+export const fetchListingsByZipFailure= (error) => ({
+    type: FETCH_LISTINGSBYZIP_FAILURE,
+    error,
+});
+
 
 
 // export const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
@@ -132,8 +143,7 @@ export const createUser = (values) => dispatch => {
       method: 'POST',
       body: JSON.stringify(values)
     })
-    .then((user) => dispatch(fetchUserData(user)))
-
+    .then(user=> dispatch(fetchUserData(user)))
     .catch(error => {
       console.error(error);
     });
@@ -147,26 +157,30 @@ export const checkUser = (values) => dispatch => {
       },
       method: 'PUT',
     })
-    .then((response) => console.log(response.json()))
+    .then(response => response.json())
     .catch(error => {
       console.error(error);
     });
 
 };
-//
-// //-----------FetchAllListing Async Action-------------//
-//
-// export const fetchListings = () => dispatch => {
-//   return fetch('/api/listings')
-//   .then(response => response.json())
-//   .then(json => {
-//     dispatch(fetchListingsSuccess(json));
-//   })
-//   .catch(error => {
-//     dispatch(fetchListingsFailure());
-//   });
-// };
-//
+
+export const fetchListingsByZip = (zipcode) => dispatch => {
+  const accessToken = Cookies.get('accessToken');
+  return fetch(`/api/jobposts/${zipcode}`, {
+    headers: {
+      authorization: `bearer ${accessToken}`
+    }
+  })
+  .then(response => response.json())
+  .then(json => {
+    console.log(json)
+    dispatch(fetchListingsByZipSuccess(json));
+  })
+  .catch(error => {
+    dispatch(fetchListingsByZipFailure());
+  });
+};
+
 // //-----------Fetch Single Listing Async Action-------------//
 //
 // export const fetchListing = id => dispatch => {

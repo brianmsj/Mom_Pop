@@ -19,6 +19,7 @@ router.post('/jobpost', passport.authenticate('bearer', {session: false}), (req,
 
   const jobPostDetails = {
     createdBy: req.user._id,
+    businessName: req.body.businessName,
     title: req.body.title,
     category: req.body.category,
     pay: req.body.pay,

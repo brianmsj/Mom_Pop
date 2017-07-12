@@ -13,6 +13,11 @@ const GeoSchema = new Schema ({
 });
 
 const JobSchema = new Schema ({
+  
+  businessName: {
+    type: String,
+    required: true
+  },
   title: {
     type: String,
     required: true
