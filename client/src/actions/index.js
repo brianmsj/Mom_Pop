@@ -22,15 +22,16 @@ export const fetchListingsByZipFailure= (error) => ({
     type: FETCH_LISTINGSBYZIP_FAILURE,
     error,
 });
-export const FETCH_LISTINGS_SUCCESS = 'FETCH_LISTINGS_SUCCESS';
-export const fetchListingSuccess = (listing) => ({
-    type: FETCH_LISTINGSBYZIP_SUCCESS,
+export const FETCH_LISTING_SUCCESS = 'FETCH_LISTING_SUCCESS';
+export const fetchListingSuccess = (singleListing) => ({
+    type: FETCH_LISTING_SUCCESS,
+    singleListing
 
 
 });
-export const FETCH_LISTINGS_FAILURE = 'FETCH_LISTINGS_FAILURE';
+export const FETCH_LISTING_FAILURE = 'FETCH_LISTING_FAILURE';
 export const fetchListingFailure= (error) => ({
-    type: FETCH_LISTINGS_FAILURE,
+    type: FETCH_LISTING_FAILURE,
     error
 });
 

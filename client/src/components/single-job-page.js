@@ -15,15 +15,25 @@ export class SingleJobPage extends Component {
     }
 
     render() {
+        const singleListing = this.props.singleListing
+        if(singleListing === {}) {
+          return <div>Loading...</div>
+        }
         return (
             <div className='row'>
-             Job Page
+             <div className='col-8'>
+              <h1>{singleListing.businessName}</h1>
+              <h2>{singleListing.title}</h2>
+              <p>{singleListing.pay}</p>
+              <p>{singleListing.description}</p>
+             </div>
             </div>
         );
      }
 }
 const mapStateToProps = ({listings}, ownProps) => ({
-   listings: listings[ownProps.match.params.id]
+   listings: listings[ownProps.match.params.id],
+   singleListing: listings.singleListing
 })
 
 
