@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
 
+
 export class SingleJobPage extends Component {
     constructor(props)  {
       super(props);
       this.state= {
       }
+    }
+    componentDidMount() {
+      const {id} = this.props.match.params;
+      this.props.dispatch(actions.fetchListing(id));
     }
 
     render() {
@@ -17,8 +22,8 @@ export class SingleJobPage extends Component {
         );
      }
 }
-const mapStateToProps = (state, props) => ({
-   listings: state.listings
+const mapStateToProps = ({listings}, ownProps) => ({
+   listings: listings[ownProps.match.params.id]
 })
 
 

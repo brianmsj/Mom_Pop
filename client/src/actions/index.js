@@ -22,6 +22,17 @@ export const fetchListingsByZipFailure= (error) => ({
     type: FETCH_LISTINGSBYZIP_FAILURE,
     error,
 });
+export const FETCH_LISTINGS_SUCCESS = 'FETCH_LISTINGS_SUCCESS';
+export const fetchListingSuccess = (listing) => ({
+    type: FETCH_LISTINGSBYZIP_SUCCESS,
+
+
+});
+export const FETCH_LISTINGS_FAILURE = 'FETCH_LISTINGS_FAILURE';
+export const fetchListingFailure= (error) => ({
+    type: FETCH_LISTINGS_FAILURE,
+    error
+});
 
 
 
@@ -183,17 +194,22 @@ export const fetchListingsByZip = (zipcode,within) => dispatch => {
 
 // //-----------Fetch Single Listing Async Action-------------//
 //
-// export const fetchListing = id => dispatch => {
-//
-//   return fetch(`/api/listing/${id}`)
-//     .then(response => response.json())
-//     .then(listing => {
-//       dispatch(fetchListingSuccess(listing[0]));
-//     })
-//     .catch(error => {
-//       dispatch(fetchListingFailure);
-//     });
-// };
+export const fetchListing = id => dispatch => {
+  const accessToken = Cookies.get('accessToken')
+  return fetch(`/api/jobposting/${id}`,  {
+    headers: {
+      authorization: `bearer ${accessToken}`
+    }
+  })
+    .then(response => response.json())
+    .then(listing => {
+      console.log(listing)
+      dispatch(fetchListingSuccess(listing[0]));
+    })
+    .catch(error => {
+      dispatch(fetchListingFailure);
+    });
+};
 //
 // //----------- FetchAllListings For A User Async Action-------------//
 //
