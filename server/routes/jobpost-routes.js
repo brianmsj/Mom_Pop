@@ -69,8 +69,8 @@ function showZips(zipcodes) {
 
 }
 
-router.get('/jobposts/:zipcode',passport.authenticate('bearer', {session: false}), (req, res) => {
-  var nearby = zipcodes.radius(req.params.zipcode,5)
+router.get('/jobposts/:zipcode/:within',passport.authenticate('bearer', {session: false}), (req, res) => {
+  var nearby = zipcodes.radius(req.params.zipcode,parseInt(req.params.within))
   JobPost
     .find()
     .exec()

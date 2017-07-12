@@ -164,9 +164,9 @@ export const checkUser = (values) => dispatch => {
 
 };
 
-export const fetchListingsByZip = (zipcode) => dispatch => {
+export const fetchListingsByZip = (zipcode,within) => dispatch => {
   const accessToken = Cookies.get('accessToken');
-  return fetch(`/api/jobposts/${zipcode}`, {
+  return fetch(`/api/jobposts/${zipcode}/${within}`, {
     headers: {
       authorization: `bearer ${accessToken}`
     }

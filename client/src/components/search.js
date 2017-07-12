@@ -22,7 +22,7 @@ export class Search extends Component {
     }
     onSubmit(event) {
       event.preventDefault()
-      this.props.dispatch(actions.fetchListingsByZip(this.state.zipCode))
+      this.props.dispatch(actions.fetchListingsByZip(this.state.zipCode,this.state.within))
     }
     // searchTerm(event) {
     //   this.setState({searchTerm: event.target.value})
@@ -40,7 +40,7 @@ export class Search extends Component {
                 <div>
                 <input className='main-search-input' type='text' placeholder='Search Jobs'></input>
                 <input className='main-search-input' onChange={this.zipCode} type='text' placeholder='Enter Location'></input>
-                <select className='main-search-input'>
+                <select onChange={this.within} className='main-search-input'>
                     <option value={2}>Within 2 miles</option>
                     <option value={5}>Within 5 miles</option>
                     <option value={10}>Within 10 miles</option>
