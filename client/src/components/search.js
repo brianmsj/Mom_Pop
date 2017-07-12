@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
 import SearchResults from './searchresults'
+import $ from 'jquery';
 
 export class Search extends Component {
     constructor(props)  {
@@ -14,9 +15,22 @@ export class Search extends Component {
       this.onSubmit = this.onSubmit.bind(this)
       this.zipCode = this.zipCode.bind(this)
       this.within = this.within.bind(this)
+      this.slideUp = this.slideUp.bind(this)
+      this.slideDown = this.slideDown.bind(this)
+      this.handleClick = this.handleClick.bind(this)
     }
     zipCode(event) {
       this.setState({zipCode: event.target.value})
+    }
+    handleClick(e) {
+     e.preventDefault();
+     this.slideDown()
+    }
+    slideUp() {
+      $('.search-container').slideUp('slow',function(){$(this).addClass('.hidden'); })
+    }
+    slideDown() {
+      $('.search-container').slideDown('slow',function(){$(this).removeClass('.hidden')})
     }
     within(event) {
       this.setState({within: event.target.value})
@@ -24,6 +38,7 @@ export class Search extends Component {
     onSubmit(event) {
       event.preventDefault()
       this.props.dispatch(actions.fetchListingsByZip(this.state.zipCode,this.state.within))
+      this.slideUp()
     }
     // searchTerm(event) {
     //   this.setState({searchTerm: event.target.value})
@@ -32,6 +47,7 @@ export class Search extends Component {
     render() {
         console.log(this.state)
         return (
+            <div className='home-container'>
             <div className='search-container'>
               <div className='home-image-container col-12'>
               <div className='motto'>
@@ -54,7 +70,9 @@ export class Search extends Component {
                 </form>
               </div>
               </div>
-              <SearchResults />
+            </div>
+             <SearchResults />
+             <button onClick={this.handleClick}>Show Search</button>
             </div>
         );
     }
