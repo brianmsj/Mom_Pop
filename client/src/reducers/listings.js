@@ -1,7 +1,7 @@
 import * as actions from '../actions/index';
 
 const initialState = {
-  listingByZip: []
+  listingsByZip: []
 };
 
 export default (state=initialState, action) => {

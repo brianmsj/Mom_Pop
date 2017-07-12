@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
+import SearchResults from './searchresults'
 
 export class Search extends Component {
     constructor(props)  {
@@ -53,6 +54,7 @@ export class Search extends Component {
                 </form>
               </div>
               </div>
+              <SearchResults />
             </div>
         );
     }
