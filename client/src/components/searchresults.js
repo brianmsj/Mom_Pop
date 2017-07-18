@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as actions from '../actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import JobFilter from './job-filter';
 
 export class SearchResults extends Component {
     constructor(props)  {
@@ -11,8 +12,11 @@ export class SearchResults extends Component {
     }
 
     render() {
+       let filter;
+       if(this.props.listings.listingsByZip.length > 0) {
+          filter = <JobFilter />
+       }
 
-        console.log(this.props.listings.listingsByZip)
         const listing = this.props.listings.listingsByZip.map((item,i)=> {
           return (
             <Link to={`/singlepost/${item._id}`}>
@@ -27,6 +31,7 @@ export class SearchResults extends Component {
         })
         return (
             <div className='row'>
+             {filter}
              {listing}
             </div>
         );
