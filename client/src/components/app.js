@@ -8,6 +8,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             currentUser: null
+            user: false,
+            superuser: false,
         };
     }
 
